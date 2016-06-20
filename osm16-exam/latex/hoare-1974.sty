@@ -1,0 +1,16 @@
+\ProvidesPackage{hoare-1974}
+
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+
+\RequirePackage{listings}
+\lstdefinelanguage{hoare-1974}{
+  keywords={monitor, begin, end, procedure, array, of, if, then,%
+            comment, enum, for, step, until, do},
+  comment=[l]{//},
+  mathescape=true,
+}
+
+\RequirePackage{xparse}
+\NewDocumentCommand\p{m}{%
+  {\ensuremath{\mathopen{}\left({#1}\right)\mathclose{}}}}

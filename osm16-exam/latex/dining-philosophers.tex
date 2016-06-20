@@ -1,0 +1,35 @@
+% Put this in your preamble:
+% \usepackage{hoare-1974}
+% Requires that you also have our hoare-1974.sty in the same directory, or
+% elsewhere.
+
+\begin{lstlisting}[language=hoare-1974]
+$dining\ philosophers$: monitor
+  begin $state$:$\p{thinking, hungry, eating}$;
+        $phil$: array $0..N-1$ of $state$;
+        $self$: array $0..N-1$ of $condition$;
+        $LEFT$: array $0..N-1$ of $int$;
+        $RIGHT$: array $0..N-1$ of $int$;
+        procedure $pickup\p{i:int}$;
+          begin $phil[i] := hungry$;
+                $test(i)$;
+                if $(phil[i] \neq eating)$ then $self[i].wait$;
+          end $pickup$;
+        procedure $putdown\p{i:int}$;
+          begin $phil[i] := thinking$;
+                $test(LEFT[i])$;
+                $test(RIGHT[i])$;
+          end $putdown$;
+        procedure $test\p{i:int}$;
+          begin if $((phil[LEFT[i]] \neq eating)\ \& \
+                    (phil[RIGHT[i]] \neq eating)\ \&$
+                    $(phil[i] = hungry))$ then
+                  begin $phil[i] := eating$;
+                        $self[i].signal$;
+                  end
+          end $test$;
+        for $i := 0$ step $1$ until $N-1$ do $state[i] := thinking$;
+        for $i := 0$ step $1$ until $N-1$ do $LEFT[i] := \p{i+1} \mod N$;
+        for $i := 0$ step $1$ until $N-1$ do $RIGHT[i] := \p{i-1} \mod N$;
+  end $dining\ philosophers$
+\end{lstlisting}
