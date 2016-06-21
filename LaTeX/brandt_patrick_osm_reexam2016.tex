@@ -333,45 +333,50 @@ timeslice is assumed to also mean timequantum with a time cutting off process ea
     \end{tabular}
 \end{table}
 
-
-
 The average turnaround time will be $228+35+69+3+3+215/6=~92.167$
 
 And the average response time will be $128+25+49+2+2+115/6=~53.5$
 
 If there is found mistakes in this particular algorithm pictures of run by hand can be found in appendix.
 
+
+
 \section*{Theoretical 3: FAT-based file systems}
 
 \subsection*{a) Allocate a file F1 of size 5,000 bytes. Show the FAT table}
 
-\begin{table}[H]
-    \centering
-    \caption{File of 5,000 bytes}
-    \label{t3-a}
-    \begin{tabular}{lll}
-        Block no.                     & Position                  & Content                                    \\ \hline
-        \multicolumn{1}{|l|}{Block 1} & \multicolumn{1}{l|}{0}    & \multicolumn{1}{l|}{Pointer to: 155}       \\ \hline
-        \multicolumn{1}{|l|}{}        & \multicolumn{1}{l|}{155}  & \multicolumn{1}{l|}{F1 (3937 bytes)}       \\ \hline
-        \multicolumn{1}{|l|}{}        & \multicolumn{1}{l|}{4092} & \multicolumn{1}{l|}{Pointer to next block} \\ \hline
-        \multicolumn{1}{|l|}{Block 2} & \multicolumn{1}{l|}{0}    & \multicolumn{1}{l|}{Content (1063 bytes)}  \\ \hline
-        \multicolumn{1}{|l|}{}        & \multicolumn{1}{l|}{1063} & \multicolumn{1}{l|}{NULL}                  \\ \hline
-    \end{tabular}
-\end{table}
+
+
 
 \subsection*{b) Allocate a file F2 of size 20,000 bytes. Show the FAT table}
 
+
+
+
 \subsection*{c) Extend F1 with an additional 5,000 bytes. Show the FAT table}
+
+
+
 
 \subsection*{d) Shorten F2 to 10,000 bytes. Show the FAT table}
 
+
+
+
+
 \subsection*{e) Allocate a file F3 of size 20,000 bytes. Show the FAT table}
+
+
+
 
 \subsection*{f) How much space (in bytes) can the FAT manage in total?}
 % Assuming one block for the FAT, how much space (in bytes) can we
 Assuming one block of the FAT system to simply be as stated in the given text 4096.
 
 The answer will be block $4096$ subtracted with pointer of $4$ bytes $= 4092$
+
+
+
 
 \subsection*{g) What are some problems with caching the FAT?}
 \textit{Using FAT can result in a significant number of disk seeks, unless the FAT is cached. What are some problems with caching the FAT? Contrast this with caching the directory control block.}
