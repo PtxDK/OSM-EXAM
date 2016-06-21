@@ -120,10 +120,10 @@
    %\Large{ }
 }
 \title{
-  \huge{Assignment Title \\}
-  \Large{Course name \\}
+  \huge{OSM 2016 \\}
+  \Large{Operating systems and multiprogramming \\}
   \vspace{3cm}
-  \Large{Assignment Type}
+  \Large{OSM Re-Exam}
 }
 
 \begin{document}
@@ -148,13 +148,142 @@
 
 
 %<<--------------------------------------------------------------->>
-\section*{Task 1}
+\section*{Theoretical 1: Critical Intersection}
+
+
 
 
 \begin{lstlisting}[language=C,caption={Example Code},label={lst:ex_code1}]
 // Destroys the mutex
 pthread_mutex_destroy();
 \end{lstlisting}
+
+\section*{Theoretical 2: Scheduling}
+
+\begin{table}[H]
+	\centering
+	\caption{Basic Info Table}
+	\label{sch-basic}
+	\begin{tabular}{lll}
+		\hline
+		\multicolumn{1}{|l|}{PID} & \multicolumn{1}{l|}{AT} & \multicolumn{1}{l|}{BT} \\ \hline
+		1                         & 0                       & 100                     \\
+		2                         & 1                       & 10                      \\
+		3                         & 2                       & 20                      \\
+		4                         & 3                       & 1                       \\
+		5                         & 10                      & 1                       \\
+		6                         & 20                      & 100                    
+	\end{tabular}
+\end{table}
+
+
+Completion time was found with: $PreviousCT+BT$
+
+Turnaround time was found with $TAT = CT-AT$
+
+Waiting/response time was found with $WT = TAT-BT$
+
+
+\subsection*{First in First out (FIFO)} % First Come First Serve (FCFS)
+
+It has been assumed that arriving jobs should be served according to arrival time.
+
+\begin{table}[H]
+	\centering
+	\caption{FIFO}
+	\label{t2-fifo}
+	\begin{tabular}{llllll}
+		\hline
+		\multicolumn{1}{|l|}{PID} & \multicolumn{1}{l|}{AT} & \multicolumn{1}{l|}{BT} & \multicolumn{1}{l|}{CT} & \multicolumn{1}{l|}{TAT} & \multicolumn{1}{l|}{WT} \\ \hline
+		1                         & 0                       & 100                     & 100                     & 100                      & 0                       \\
+		2                         & 1                       & 10                      & 110                     & 109                      & 99                      \\
+		3                         & 2                       & 20                      & 130                     & 128                      & 108                     \\
+		4                         & 3                       & 1                       & 131                     & 128                      & 127                     \\
+		5                         & 10                      & 1                       & 131                     & 122                      & 121                     \\
+		6                         & 20                      & 100                     & 232                     & 212                      & 112                    
+	\end{tabular}
+\end{table}
+
+Thus the average turnaround time will be $100+109+128+128+122+212/6=~133.1667$
+
+And the average response time also called waiting time will be $0+99+108+127+121+112/6=94.5$
+
+\subsection*{Shortest Job First(SJF)}
+
+\begin{table}[H]
+	\centering
+	\caption{SJF}
+	\label{t2-sjf}
+	\begin{tabular}{llllll}
+		\hline
+		\multicolumn{1}{|l|}{PID} & \multicolumn{1}{l|}{AT} & \multicolumn{1}{l|}{BT} & \multicolumn{1}{l|}{CT} & \multicolumn{1}{l|}{TAT} & \multicolumn{1}{l|}{WT} \\ \hline
+		1                         & 0                       & 100                     & 100                     & 100                      & 0                       \\
+		2                         & 1                       & 10                      & 112                     & 111                      & 101                     \\
+		3                         & 2                       & 20                      & 132                     & 130                      & 110                     \\
+		4                         & 3                       & 1                       & 101                     & 98                       & 97                      \\
+		5                         & 10                      & 1                       & 102                     & 92                       & 91                      \\
+		6                         & 20                      & 100                     & 232                     & 212                      & 112                    
+	\end{tabular}
+\end{table}
+
+
+The average turnaround time will be $110+111+130+98+92+212/6=~123.83$
+
+And the average response time will be
+
+$0+101+110+97+91+112/6=~85.167$
+
+
+\subsection*{Shortest Time to Completion First (STCF)}
+
+\begin{table}[H]
+	\centering
+	\caption{STCF}
+	\label{t2-stcf}
+	\begin{tabular}{llllll}
+		\hline
+		\multicolumn{1}{|l|}{PID} & \multicolumn{1}{l|}{AT} & \multicolumn{1}{l|}{BT} & \multicolumn{1}{l|}{CT} & \multicolumn{1}{l|}{TAT} & \multicolumn{1}{l|}{WT} \\ \hline
+		1                         & 0                       & 100                     & 132                     & 132                      & 32                      \\
+		2                         & 1                       & 10                      & 13                      & 12                       & 2                       \\
+		3                         & 2                       & 20                      & 33                      & 31                       & 11                      \\
+		4                         & 3                       & 1                       & 4                       & 1                        & 0                       \\
+		5                         & 10                      & 1                       & 11                      & 1                        & 0                       \\
+		6                         & 20                      & 100                     & 232                     & 132                      & 32                     
+	\end{tabular}
+\end{table}
+
+The average turnaround time will be $132+12+31+1+1+132/6=51.5$
+
+And the average response time will be $32+2+11+0+0+32/6=~12.83$
+
+\subsection*{Round Robin (RR)}
+
+timeslice is assumed to also mean timequantum with a time cutting off process each one second.
+
+
+
+
+
+The average turnaround time will be $132+12+31+1+1+132/6=51.5$
+
+And the average response time will be $32+2+11+0+0+32/6=~12.83$
+
+\section*{Theoretical 3: FAT-based file systems}
+
+
+
+
+\section*{Practical 1: Monitors in KUDOS}
+
+
+
+
+\section*{Practical 2: Bunny Allocation}
+
+
+
+
+
 
 
 %\newpage
