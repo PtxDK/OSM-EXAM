@@ -153,9 +153,66 @@
 
 
 
-\begin{lstlisting}[language=C,caption={Example Code},label={lst:ex_code1}]
-// Destroys the mutex
-pthread_mutex_destroy();
+\begin{lstlisting}[language=XML,caption={Example Code},label={lst:ex_code1}]
+<xml xmlns="http://www.w3.org/1999/xhtml">
+<block type="osm16_1st_reexam_sem_decl" id="=i]`7Yfm+C`amm5V{R)T" deletable="false" movable="false" x="0" y="0">
+<statement name="DECL">
+<block type="osm16_sem_t_arr" id="s)Q54N]Ib+};V^^Nm3LB">
+<field name="VARNAME">Roads_sems</field>
+<value name="N">
+<block type="osm16_varget" id="?I#*Oqxa;nRVrF^yg.ig">
+<field name="VARNAME">n</field>
+</block>
+</value>
+</block>
+</statement>
+<next>
+<block type="osm16_1st_reexam_sem_init" id="fy8HcTz]S):(s?IDO-S@" deletable="false" movable="false">
+<statement name="INIT">
+<block type="osm16_for" id="X/{/gewkOFY]..v6d;9h">
+<field name="VARNAME">j</field>
+<value name="END">
+<block type="osm16_varget" id="IE2nq.~9Cur7/obz?XR(">
+<field name="VARNAME">n</field>
+</block>
+</value>
+</block>
+</statement>
+<next>
+<block type="osm16_1st_reexam_sem_intersection" id="Z7()sd`KQ{}HI7NX?R*B" deletable="false" movable="false">
+<statement name="INTERSECTION">
+<block type="osm16_infloop" id="AY)uT6v]A7l5s~B*EdT+"></block>
+</statement>
+<next>
+<block type="osm16_1st_reexam_sem_vehicle" id="@TW]BA^706@FR*5Y-1o4" deletable="false" movable="false">
+<field name="VARNAME">i</field>
+<statement name="VEHICLE">
+<block type="osm16_sem_P" id="rpm%P5Gz)vKI7s{gsmy%">
+<value name="SEMAPHORE">
+<block type="osm16_varget" id="390c:v).:?GTn`O!I_sC">
+<field name="VARNAME">i</field>
+</block>
+</value>
+<next>
+<block type="osm16_sem_V" id="%c,*6PBeU:z]m:N|8(ZK">
+<value name="SEMAPHORE">
+<block type="osm16_varget" id="ewl,Iny8iM#/S[u8lI=E">
+<field name="VARNAME">i</field>
+</block>
+</value>
+</block>
+</next>
+</block>
+</statement>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+<block type="osm16_sem_init" id="}duOpxx^wtr^scM5a=|A" x="187" y="149"></block>
+</xml>
 \end{lstlisting}
 
 \section*{Theoretical 2: Scheduling}
@@ -208,7 +265,7 @@ Thus the average turnaround time will be $100+109+128+128+122+212/6=~133.1667$
 
 And the average response time also called waiting time will be $0+99+108+127+121+112/6=94.5$
 
-\subsection*{Shortest Job First(SJF)}
+\subsection*{Shortest Job First (SJF)}
 
 \begin{table}[H]
 	\centering
@@ -252,9 +309,9 @@ $0+101+110+97+91+112/6=~85.167$
 	\end{tabular}
 \end{table}
 
-The average turnaround time will be $132+12+31+1+1+132/6=51.5$
+The average turnaround time will be $132+12+31+1+1+212/6=~64.834$
 
-And the average response time will be $32+2+11+0+0+32/6=~12.83$
+And the average response time will be $32+2+11+0+0+112/6=~26.167$
 
 \subsection*{Round Robin (RR)}
 
@@ -286,7 +343,38 @@ If there is found mistakes in this particular algorithm pictures of run by hand 
 
 \section*{Theoretical 3: FAT-based file systems}
 
+\subsection*{a) Allocate a file F1 of size 5,000 bytes. Show the FAT table}
 
+\begin{table}[H]
+    \centering
+    \caption{File of 5,000 bytes}
+    \label{t3-a}
+    \begin{tabular}{lll}
+        Block no.                     & Position                  & Content                                    \\ \hline
+        \multicolumn{1}{|l|}{Block 1} & \multicolumn{1}{l|}{0}    & \multicolumn{1}{l|}{Pointer to: 155}       \\ \hline
+        \multicolumn{1}{|l|}{}        & \multicolumn{1}{l|}{155}  & \multicolumn{1}{l|}{F1 (3937 bytes)}       \\ \hline
+        \multicolumn{1}{|l|}{}        & \multicolumn{1}{l|}{4092} & \multicolumn{1}{l|}{Pointer to next block} \\ \hline
+        \multicolumn{1}{|l|}{Block 2} & \multicolumn{1}{l|}{0}    & \multicolumn{1}{l|}{Content (1063 bytes)}  \\ \hline
+        \multicolumn{1}{|l|}{}        & \multicolumn{1}{l|}{1063} & \multicolumn{1}{l|}{NULL}                  \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsection*{b) Allocate a file F2 of size 20,000 bytes. Show the FAT table}
+
+\subsection*{c) Extend F1 with an additional 5,000 bytes. Show the FAT table}
+
+\subsection*{d) Shorten F2 to 10,000 bytes. Show the FAT table}
+
+\subsection*{e) Allocate a file F3 of size 20,000 bytes. Show the FAT table}
+
+\subsection*{f) How much space (in bytes) can the FAT manage in total?}
+% Assuming one block for the FAT, how much space (in bytes) can we
+Assuming one block of the FAT system to simply be as stated in the given text 4096.
+
+The answer will be block $4096$ subtracted with pointer of $4$ bytes $= 4092$
+
+\subsection*{g) What are some problems with caching the FAT?}
+\textit{Using FAT can result in a significant number of disk seeks, unless the FAT is cached. What are some problems with caching the FAT? Contrast this with caching the directory control block.}
 
 
 \section*{Practical 1: Monitors in KUDOS}
