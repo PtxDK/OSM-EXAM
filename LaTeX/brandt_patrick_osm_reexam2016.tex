@@ -177,7 +177,7 @@ pthread_mutex_destroy();
 \end{table}
 
 
-Completion time was found with: $PreviousCT+BT$
+Completion time was found with: $PreviousCT+RemainingBT$
 
 Turnaround time was found with $TAT = CT-AT$
 
@@ -260,13 +260,29 @@ And the average response time will be $32+2+11+0+0+32/6=~12.83$
 
 timeslice is assumed to also mean timequantum with a time cutting off process each one second.
 
+\begin{table}[H]
+    \centering
+    \caption{RR}
+    \label{t2-rr}
+    \begin{tabular}{llllll}
+        \hline
+        \multicolumn{1}{|l|}{PID} & \multicolumn{1}{l|}{AT} & \multicolumn{1}{l|}{BT} & \multicolumn{1}{l|}{CT} & \multicolumn{1}{l|}{TAT} & \multicolumn{1}{l|}{WT} \\ \hline
+        1                         & 0                       & 100                     & 228                     & 228                      & 128                     \\
+        2                         & 1                       & 10                      & 36                      & 35                       & 25                      \\
+        3                         & 2                       & 20                      & 71                      & 69                       & 49                      \\
+        4                         & 3                       & 1                       & 6                       & 3                        & 2                       \\
+        5                         & 10                      & 1                       & 13                      & 3                        & 2                       \\
+        6                         & 20                      & 100                     & 235                     & 215                      & 115                    
+    \end{tabular}
+\end{table}
 
 
 
+The average turnaround time will be $228+35+69+3+3+215/6=~92.167$
 
-The average turnaround time will be $132+12+31+1+1+132/6=51.5$
+And the average response time will be $128+25+49+2+2+115/6=~53.5$
 
-And the average response time will be $32+2+11+0+0+32/6=~12.83$
+If there is found mistakes in this particular algorithm pictures of run by hand can be found in appendix.
 
 \section*{Theoretical 3: FAT-based file systems}
 
@@ -282,6 +298,7 @@ And the average response time will be $32+2+11+0+0+32/6=~12.83$
 
 
 
+\section*{Appendix}
 
 
 
