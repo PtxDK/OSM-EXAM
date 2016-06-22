@@ -812,6 +812,19 @@ void heap_init()
 }
 
 
+int malloc_fib(int i) {
+  if (i==0) {
+    return 4;
+  }
+  else if (i==1) {
+    return 8;
+  }
+  else if (i>8 && i<256) {
+    return malloc_fib(i-1)+malloc_fib(i-2);
+  }
+  return -42;
+} 
+
 /* Return a block of at least size bytes, or NULL if no such block
    can be found.  */
 void *malloc(size_t size) {
