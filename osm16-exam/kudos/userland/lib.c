@@ -825,14 +825,14 @@ void *malloc(size_t size) {
   size=MAX(MIN_ALLOC_SIZE,size);
   /* Word-align */
   if (size % 4 != 0) {
-    size &= ~3;
+    size &= ~3;             // Makes sure chunk is 4
     size += 4;
   }
 
   /* Iterate through list of free blocks, using the first that is
      big enough for the request. */
   for (block = free_list, prev_p = &free_list;
-       block;
+       block; // == 0
        prev_p = &(block->next), block = block->next) {
 
     if ( (int)( block->size - size - sizeof(size_t) ) >=
@@ -842,7 +842,7 @@ void *malloc(size_t size) {
       free_block_t *new_block =
         (free_block_t*)(((byte*)block)+block->size);
       new_block->size = size+sizeof(size_t);
-      return ((byte*)new_block)+sizeof(size_t);
+      return ((byte*)new_block)+sizeof(size_t); // Return the new block with size
 
 
     } else if (block->size >= size + sizeof(size_t)) {

@@ -1,6 +1,6 @@
 # Add your _userland_ program sources to the SOURCES variable.
 
-SOURCES :=  halt.c hw.c rw.c vuln0.c \
+SOURCES :=  halt.c hw.c rw.c vuln0.c printsome.c \
 						spawnn.c tenlines.c \
 						initthr.c threads.c \
 						msgtest.c tclient.c tmanager.c \

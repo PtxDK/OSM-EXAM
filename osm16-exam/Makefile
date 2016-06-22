@@ -1,5 +1,5 @@
-STUDENT=knuth
-VERSION=1
+STUDENT=brandt_patrick
+VERSION=0.1
 
 TAR_GZ=$(STUDENT)-osm16-exam-v$(VERSION).tar.gz
 
