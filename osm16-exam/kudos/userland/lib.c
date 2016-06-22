@@ -834,6 +834,7 @@ void *malloc(size_t size) {
   for (block = free_list, prev_p = &free_list;
        block;
        prev_p = &(block->next), block = block->next) {
+
     if ( (int)( block->size - size - sizeof(size_t) ) >=
          (int)( MIN_ALLOC_SIZE+sizeof(size_t) ) ) {
       /* Block is too big, but can be split. */
@@ -842,6 +843,8 @@ void *malloc(size_t size) {
         (free_block_t*)(((byte*)block)+block->size);
       new_block->size = size+sizeof(size_t);
       return ((byte*)new_block)+sizeof(size_t);
+
+
     } else if (block->size >= size + sizeof(size_t)) {
       /* Block is big enough, but not so big that we can split
          it, so just return it */
