@@ -150,70 +150,10 @@
 %<<--------------------------------------------------------------->>
 \section*{Theoretical 1: Critical Intersection}
 
+\textit{To shortly introduce the my solution, I will explain the assumptions that is made to make it a valid solution.}
 
 
 
-\begin{lstlisting}[language=XML,caption={Example Code},label={lst:ex_code1}]
-<xml xmlns="http://www.w3.org/1999/xhtml">
-<block type="osm16_1st_reexam_sem_decl" id="=i]`7Yfm+C`amm5V{R)T" deletable="false" movable="false" x="0" y="0">
-<statement name="DECL">
-<block type="osm16_sem_t_arr" id="s)Q54N]Ib+};V^^Nm3LB">
-<field name="VARNAME">Roads_sems</field>
-<value name="N">
-<block type="osm16_varget" id="?I#*Oqxa;nRVrF^yg.ig">
-<field name="VARNAME">n</field>
-</block>
-</value>
-</block>
-</statement>
-<next>
-<block type="osm16_1st_reexam_sem_init" id="fy8HcTz]S):(s?IDO-S@" deletable="false" movable="false">
-<statement name="INIT">
-<block type="osm16_for" id="X/{/gewkOFY]..v6d;9h">
-<field name="VARNAME">j</field>
-<value name="END">
-<block type="osm16_varget" id="IE2nq.~9Cur7/obz?XR(">
-<field name="VARNAME">n</field>
-</block>
-</value>
-</block>
-</statement>
-<next>
-<block type="osm16_1st_reexam_sem_intersection" id="Z7()sd`KQ{}HI7NX?R*B" deletable="false" movable="false">
-<statement name="INTERSECTION">
-<block type="osm16_infloop" id="AY)uT6v]A7l5s~B*EdT+"></block>
-</statement>
-<next>
-<block type="osm16_1st_reexam_sem_vehicle" id="@TW]BA^706@FR*5Y-1o4" deletable="false" movable="false">
-<field name="VARNAME">i</field>
-<statement name="VEHICLE">
-<block type="osm16_sem_P" id="rpm%P5Gz)vKI7s{gsmy%">
-<value name="SEMAPHORE">
-<block type="osm16_varget" id="390c:v).:?GTn`O!I_sC">
-<field name="VARNAME">i</field>
-</block>
-</value>
-<next>
-<block type="osm16_sem_V" id="%c,*6PBeU:z]m:N|8(ZK">
-<value name="SEMAPHORE">
-<block type="osm16_varget" id="ewl,Iny8iM#/S[u8lI=E">
-<field name="VARNAME">i</field>
-</block>
-</value>
-</block>
-</next>
-</block>
-</statement>
-</block>
-</next>
-</block>
-</next>
-</block>
-</next>
-</block>
-<block type="osm16_sem_init" id="}duOpxx^wtr^scM5a=|A" x="187" y="149"></block>
-</xml>
-\end{lstlisting}
 
 \section*{Theoretical 2: Scheduling}
 
@@ -347,7 +287,7 @@ If there is found mistakes in this particular algorithm pictures of run by hand 
 
 
 \begin{figure}[H]
-    \caption{F1 of 5,000 bytes}
+    \caption{FAT Table of F1 containing 5,000 bytes}
     \centering
     \includegraphics[scale=0.5]{figures/t3-a.png}
 \end{figure}
@@ -357,18 +297,17 @@ If there is found mistakes in this particular algorithm pictures of run by hand 
 \subsection*{b) Allocate a file F2 of size 20,000 bytes. Show the FAT table}
 
 \begin{figure}[H]
-    \caption{F1 of 5,000 bytes}
+    \caption{FAT Table of F2 containing 20,000 bytes}
     \centering
     \includegraphics[scale=0.5]{figures/t3-b.png}
 \end{figure}
 
 
 
-
 \subsection*{c) Extend F1 with an additional 5,000 bytes. Show the FAT table}
 
 \begin{figure}[H]
-    \caption{F1 of 5,000 bytes}
+    \caption{FAT Table of F1 containing 10,000 bytes}
     \centering
     \includegraphics[scale=0.5]{figures/t3-c.png}
 \end{figure}
@@ -377,26 +316,38 @@ If there is found mistakes in this particular algorithm pictures of run by hand 
 
 \subsection*{d) Shorten F2 to 10,000 bytes. Show the FAT table}
 
-
+\begin{figure}[H]
+    \caption{FAT Table of F2 shortened by 10,000 bytes}
+    \centering
+    \includegraphics[scale=0.5]{figures/t3-d.png}
+\end{figure}
 
 
 
 \subsection*{e) Allocate a file F3 of size 20,000 bytes. Show the FAT table}
 
+\begin{figure}[H]
+    \caption{FAT Table of file F3 by 20,000 bytes}
+    \centering
+    \includegraphics[scale=0.5]{figures/t3-e.png}
+\end{figure}
 
 
 
 \subsection*{f) How much space (in bytes) can the FAT manage in total?}
 % Assuming one block for the FAT, how much space (in bytes) can we
-Assuming one block of the FAT system to simply be as stated in the given text 4096.
+Assuming one block of the FAT system to simply be as stated in the given text 4096, and that one block can only contain one pointer in the end.
 
 The answer will be block $4096$ subtracted with pointer of $4$ bytes $= 4092$
 
-
+\textit{I am convinced that my answer is incorrect, though I am unable to provide a better one.}
 
 
 \subsection*{g) What are some problems with caching the FAT?}
 \textit{Using FAT can result in a significant number of disk seeks, unless the FAT is cached. What are some problems with caching the FAT? Contrast this with caching the directory control block.}
+
+Firstly as seen above, when a file is stored and later extended, the meantime allows for another file to be placed in the following block, and thus forcing rest of the file to be stored at a completely different part of the disk and thereby making load time of a normal disk-based hard drive very inefficient.
+
 
 
 \section*{Practical 1: Monitors in KUDOS}

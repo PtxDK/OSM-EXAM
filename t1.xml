@@ -1,0 +1,132 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="osm16_1st_reexam_sem_decl" id="=i]`7Yfm+C`amm5V{R)T" deletable="false" movable="false" x="0" y="0">
+    <statement name="DECL">
+      <block type="osm16_sem_t_var" id="CGGp[jxWA`G1bY*Pn{xg">
+        <field name="VARNAME">MaxCars</field>
+        <next>
+          <block type="osm16_sem_t_var" id=";?g|yTD^-3Z]]HOw;xWs">
+            <field name="VARNAME">Mutex</field>
+            <next>
+              <block type="osm16_sem_t_var" id="ieAfK+nNjl%Q9|Uu1KPM">
+                <field name="VARNAME">Empty</field>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="osm16_1st_reexam_sem_init" id="fy8HcTz]S):(s?IDO-S@" deletable="false" movable="false">
+        <statement name="INIT">
+          <block type="osm16_sem_init" id="}duOpxx^wtr^scM5a=|A">
+            <value name="SEMAPHORE">
+              <block type="osm16_varget" id="hio))tsxtM7:+E*p=3Jh">
+                <field name="VARNAME">MaxCars</field>
+              </block>
+            </value>
+            <value name="VALUE">
+              <block type="math_number" id="qou}b:55/aLO0[a:z#oZ">
+                <field name="NUM">5</field>
+              </block>
+            </value>
+            <next>
+              <block type="osm16_sem_init" id="{Os#VxyS3LZo@J^MEFRp">
+                <value name="SEMAPHORE">
+                  <block type="osm16_varget" id="^N+(Z1yc)Ll{!MfFh2[!">
+                    <field name="VARNAME">Mutex</field>
+                  </block>
+                </value>
+                <value name="VALUE">
+                  <block type="math_number" id="bKBiYE,;0EQtVC[`3-PJ">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="osm16_sem_init" id="5)*,YupwXoOj+lvGHqnb">
+                    <value name="SEMAPHORE">
+                      <block type="osm16_varget" id="V-YCCk/u%@_IPqf9Q*bd">
+                        <field name="VARNAME">Empty</field>
+                      </block>
+                    </value>
+                    <value name="VALUE">
+                      <block type="math_number" id="KX:lwoN?xpIQ_aqiW!/L">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="osm16_1st_reexam_sem_intersection" id="Z7()sd`KQ{}HI7NX?R*B" deletable="false" movable="false">
+            <statement name="INTERSECTION">
+              <block type="osm16_sem_P" id="WgG}7c.V!zn?g?dZ.CLf">
+                <value name="SEMAPHORE">
+                  <block type="osm16_varget" id="I/Jf8e#.KM-sk-4mJrNc">
+                    <field name="VARNAME">Mutex</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="osm16_infloop" id="AY)uT6v]A7l5s~B*EdT+">
+                    <statement name="BODY">
+                      <block type="osm16_sem_P" id="h^_TBRHnrK971K0e6Z=T">
+                        <value name="SEMAPHORE">
+                          <block type="osm16_varget" id="#z-SU165i(v`Fr)`^8pk">
+                            <field name="VARNAME">MaxCars</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="osm16_sem_V" id="ui;WbuyyIm1]qI9DVM7Z">
+                            <value name="SEMAPHORE">
+                              <block type="osm16_varget" id="UHu28!F1wcE1]h.16aE@">
+                                <field name="VARNAME">Empty</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="osm16_sem_V" id="~JBFi]z3@9W({LSj}Q+s">
+                        <value name="SEMAPHORE">
+                          <block type="osm16_varget" id="c7Fi?`e3j01zPCfF/=dJ">
+                            <field name="VARNAME">Mutex</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="osm16_1st_reexam_sem_vehicle" id="@TW]BA^706@FR*5Y-1o4" deletable="false" movable="false">
+                <field name="VARNAME">i</field>
+                <statement name="VEHICLE">
+                  <block type="osm16_sem_V" id="9OMc,psQYtcqxo]4x+ka">
+                    <value name="SEMAPHORE">
+                      <block type="osm16_varget" id="w=bnBo?*e~gI7pHor|Xf">
+                        <field name="VARNAME">Empty</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="osm16_sem_P" id="#V*4vgpybV~-_OP}ZH%h">
+                        <value name="SEMAPHORE">
+                          <block type="osm16_varget" id="WWK,FeCL:7nhDvr^y5V%">
+                            <field name="VARNAME">Mutex</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
