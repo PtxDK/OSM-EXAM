@@ -828,29 +828,58 @@ int malloc_fib(int i) {
 /* Return a block of at least size bytes, or NULL if no such block
    can be found.  */
 void *malloc(size_t size) {
+
   free_block_t *block;
-  free_block_t **prev_p; /* Previous link so we can remove an element */
+  free_block_t **prev // Previous block pointer
   if (size == 0) {
     return NULL;
   }
 
-  /* Ensure block is big enough for bookkeeping. */
+  // Ensure block is biy enough for bookkeeping
+  size = MAX(MIN_ALLOC_SIZE,size);
+  // Word Align
+  if (size % 4 != 0) {
+  size &= ~3; // Make sure chunk is 4
+  size += 4;
+  }
+
+  for (block = free_list, prev_p = &free_list;
+      block;
+      prev_p = &(block->next), block = blocl->next) {
+    
+    
+    
+  }
+
+
+
+
+  return NULL;
+
+/*  // Original Code
+  free_block_t *block;
+  free_block_t **prev_p; // Previous link so we can remove an element
+  if (size == 0) {
+    return NULL;
+  }
+
+  // Ensure block is big enough for bookkeeping.
   size=MAX(MIN_ALLOC_SIZE,size);
-  /* Word-align */
+  // Word-align
   if (size % 4 != 0) {
     size &= ~3;             // Makes sure chunk is 4
     size += 4;
   }
 
-  /* Iterate through list of free blocks, using the first that is
-     big enough for the request. */
+  // Iterate through list of free blocks, using the first that is
+  // big enough for the request.
   for (block = free_list, prev_p = &free_list;
        block; // == 0
        prev_p = &(block->next), block = block->next) {
 
     if ( (int)( block->size - size - sizeof(size_t) ) >=
          (int)( MIN_ALLOC_SIZE+sizeof(size_t) ) ) {
-      /* Block is too big, but can be split. */
+      // Block is too big, but can be split.
       block->size -= size+sizeof(size_t);
       free_block_t *new_block =
         (free_block_t*)(((byte*)block)+block->size);
@@ -859,16 +888,16 @@ void *malloc(size_t size) {
 
 
     } else if (block->size >= size + sizeof(size_t)) {
-      /* Block is big enough, but not so big that we can split
-         it, so just return it */
+      // Block is big enough, but not so big that we can split
+      // it, so just return it
       *prev_p = block->next;
       return ((byte*)block)+sizeof(size_t);
     }
-    /* Else, check the next block. */
+    // Else, check the next block.
   }
 
-  /* No heap space left. */
-  return NULL;
+  // No heap space left.
+  return NULL; */
 }
 
 /* Return the block pointed to by ptr to the free pool. */
