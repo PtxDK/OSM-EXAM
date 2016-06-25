@@ -830,7 +830,9 @@ int malloc_fib(int i) {
 void *malloc(size_t size) {
 
   free_block_t *block;
-  free_block_t **prev // Previous block pointer
+  free_block_t **prev_p; // Previous block pointer
+  
+
   if (size == 0) {
     return NULL;
   }
@@ -843,18 +845,23 @@ void *malloc(size_t size) {
   size += 4;
   }
 
+  // ----------------- Start of algorithm -----------------
   for (block = free_list, prev_p = &free_list;
-      block;
-      prev_p = &(block->next), block = blocl->next) {
+       block;
+       prev_p = &(block->next), block = block->next) {
     
-    
-    
+      
+      
   }
 
 
 
 
   return NULL;
+  // ---------------- End of algorithm -------------------
+
+
+
 
 /*  // Original Code
   free_block_t *block;
