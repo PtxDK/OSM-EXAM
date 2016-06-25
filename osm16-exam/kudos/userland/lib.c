@@ -831,7 +831,6 @@ void *malloc(size_t size) {
 
   free_block_t *block;
   free_block_t **prev_p; // Previous block pointer
-  
 
   if (size == 0) {
     return NULL;
@@ -845,13 +844,32 @@ void *malloc(size_t size) {
   size += 4;
   }
 
+
+
   // ----------------- Start of algorithm -----------------
+
+  
+
   for (block = free_list, prev_p = &free_list;
        block;
        prev_p = &(block->next), block = block->next) {
     
-      
-      
+    // Check if current block is big enough
+    if ( (int)( block->size - size - sizeof(size_t) ) >= (int)( MIN_ALLOC_SIZE+sizeof(size_t) ) ) {
+      /* Block is too big, but can be split. */
+      block->size -= size+sizeof(size_t);
+      free_block_t *new_block = (free_block_t*)(((byte*)block)+block->size);
+      new_block->size = size+sizeof(size_t);
+
+      return ((byte*)new_block)+sizeof(size_t);
+    } else if (block->size >= size + sizeof(size_t)) {
+      /* Block is big enough, but not so big that we can split
+         it, so just return it */
+      *prev_p = block->next;
+      return ((byte*)block)+sizeof(size_t);
+    }
+    /* Else, check the next block. */
+  
   }
 
 
@@ -949,6 +967,48 @@ void free(void *ptr)
     }
   }
 }
+
+
+
+
+int mon_init(mon_t *mon) {
+  mon = mon;
+  return 0;
+}
+
+
+int mon_call(mon_t *mon, void (*fun)(void*), void* arg) {
+  mon = mon;
+  fun = fun;
+  arg=arg;
+  return 0;
+}
+
+
+int mon_cond_init(mon_t *mon, mon_cond_t *cond) {
+  mon = mon;
+  cond = cond;
+  return 0;
+}
+
+void mon_cond_wait(mon_cond_t *cond) {
+  cond = cond;
+}
+
+void mon_cond_signal(mon_cond_t *cond) {
+  cond = cond;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 void *calloc(size_t nmemb, size_t size)
 {

@@ -25,6 +25,38 @@
 
 typedef uint8_t byte;
 
+
+
+// -------- Patrick Brand editings BEGIN ----------
+
+
+// Practical 1
+typedef struct mon_t {
+  // char title[50];
+  // char author[50];
+  
+  int available;
+} mon_t;
+
+typedef int mon_cond_t;
+
+int mon_init(mon_t *mon);
+int mon_call(mon_t *mon, void (*fun)(void*), void* arg);
+
+int mon_cond_init(mon_t *mon, mon_cond_t *cond);
+void mon_cond_wait(mon_cond_t *cond);
+void mon_cond_signal(mon_cond_t *cond);
+
+
+// Practical 2
+
+
+
+
+// -------- Patrick Brandt editings END -----------
+
+
+
 /* POSIX-like integer types */
 
 typedef intptr_t ssize_t;
