@@ -332,11 +332,7 @@ If there is found mistakes in this particular algorithm pictures of run by hand 
 
 \subsection*{f) How much space (in bytes) can the FAT manage in total?}
 % Assuming one block for the FAT, how much space (in bytes) can we
-Assuming one block of the FAT system to simply be as stated in the given text 4096, and that one block can only contain one pointer in the end.
-
-The answer will be block $4096$ subtracted with pointer of $4$ bytes $= 4092$
-
-\textit{I am convinced that my answer is incorrect, though I am unable to provide a better one.}
+With 4,096-byte blocks, one would be able to store 1,024 four-byte pointers in an index block. And two levels of indexes allow 1,048,576 data blocks and a file size of up to 4 GB.
 
 
 \subsection*{g) What are some problems with caching the FAT?}
@@ -348,15 +344,38 @@ Firstly as seen above, when a file is stored and later extended, the meantime al
 
 \section*{Practical 1: Monitors in KUDOS}
 
-
-
+Not solved.
 
 \section*{Practical 2: Bunny Allocation}
+
+\subsection*{Kudos Implementation}
+
+- Linear time for malloc and free
+– Due to the need to scan the free list
+
+\subsection*{Coalescing}
+
+
+
+
+\subsubsection*{External fragmentation}
+
+The problem size of external fragmentation raises with the number of middle block-removals there has been, since the different allocated memory blocks will be scattered around in memory.
+
+
+
+
+% External fragmentation arises when free memory is separated into small blocks and is interspersed by allocated memory. It is a weakness of certain storage allocation algorithms, when they fail to order memory used by programs efficiently. The result is that, although free storage is available, it is effectively unusable because it is divided into pieces that are too small individually to satisfy the demands of the application. The term "external" refers to the fact that the unusable storage is outside the allocated regions.
+
+
+\subsection{New Implementation}
+
+
+
 
 
 
 \section*{Appendix}
-
 
 
 
