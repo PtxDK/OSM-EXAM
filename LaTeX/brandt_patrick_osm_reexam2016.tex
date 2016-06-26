@@ -273,8 +273,7 @@ The average turnaround time will be $228+35+69+3+3+215/6=~92.167$
 
 And the average response time will be $128+25+49+2+2+115/6=~53.5$
 
-If there is found mistakes in this particular algorithm pictures of run by hand can be found in appendix.
-
+According to the total time available to P6, this TAT should be no more than 232, however my handrun appeared to give me 235, and so. If there is found mistakes in this particular algorithm, pictures of run by hand can be found in Appendix.
 
 
 \section*{Theoretical 3: FAT-based file systems}
@@ -360,22 +359,45 @@ Not solved.
 
 \subsubsection*{External fragmentation}
 
-The problem size of external fragmentation raises with the number of middle block-removals there has been, since the different allocated memory blocks will be scattered around in memory.
+``Data fragmentation occurs when a collection of data in memory is broken up into many pieces that are not close together. It is typically the result of attempting to insert a large object into storage that has already suffered external fragmentation'' \footnote{\url{https://en.wikipedia.org/wiki/Fragmentation_(computing)}}
+
+The problem size of external fragmentation raises with the number of middle block-removals there has been, because the different allocated memory blocks will be scattered around in memory.
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[H]
+    \centering
+    \caption{External Fragmentation Example}
+    \label{my-label}
+    \begin{tabular}{llll}
+        Iteration                                                                                                                      & \multicolumn{3}{l}{Blocks}                                                                                                                                                                                         \\ \hline
+        \multicolumn{1}{|l|}{Memory is empty}                                                                                          & \multicolumn{1}{l|}{\cellcolor[HTML]{32CB00}{\color[HTML]{333333} }} & \multicolumn{1}{l|}{\cellcolor[HTML]{32CB00}{\color[HTML]{333333} }} & \multicolumn{1}{l|}{\cellcolor[HTML]{32CB00}{\color[HTML]{333333} }} \\ \hline
+        \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Large object is inserted\\ into multiple blocks\end{tabular}}                  & \multicolumn{1}{l|}{\cellcolor[HTML]{E7E500}}                        & \multicolumn{1}{l|}{\cellcolor[HTML]{E7E500}}                        & \multicolumn{1}{l|}{\cellcolor[HTML]{E7E500}}                        \\ \hline
+        \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}A block in the middle is\\ removed and memory is\\ now scattered\end{tabular}} & \multicolumn{1}{l|}{\cellcolor[HTML]{E7E500}{\color[HTML]{333333} }} & \multicolumn{1}{l|}{\cellcolor[HTML]{FE0000}{\color[HTML]{333333} }} & \multicolumn{1}{l|}{\cellcolor[HTML]{E7E500}{\color[HTML]{333333} }} \\ \hline
+    \end{tabular}
+\end{table}
 
 
-
+Green indicates free memory and Yellow indicates nicely used memory while Red indicates that the block is placed very inconvenient.
 
 % External fragmentation arises when free memory is separated into small blocks and is interspersed by allocated memory. It is a weakness of certain storage allocation algorithms, when they fail to order memory used by programs efficiently. The result is that, although free storage is available, it is effectively unusable because it is divided into pieces that are too small individually to satisfy the demands of the application. The term "external" refers to the fact that the unusable storage is outside the allocated regions.
 
 
-\subsection{New Implementation}
+\subsection*{New Implementation}
 
+My new implementation is a very poor hard-coded version of the described algorithm.
 
+The idea is to keep track of more than one structure, allowing for a shorter running time. Thus this ......
 
 
 
 
 \section*{Appendix}
+
 
 
 
